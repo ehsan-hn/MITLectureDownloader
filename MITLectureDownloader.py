@@ -10,12 +10,19 @@ import os.path
 baseUrl="https://ocw.mit.edu"
 courseUrl=raw_input("Enter the course link: ")#"https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-034-artificial-intelligence-fall-2010"
 lecturesPage="/lecture-videos/"
+lecturesPage2="/videos-lecture/"
 lecturesPageUrl=courseUrl+lecturesPage
-
+dpage
 print ("reading course name...")
-dpage = rq.get(courseUrl)
-dsoup = bs4.BeautifulSoup(dpage.content)
-
+try:
+    
+    dpage = rq.get(courseUrl)
+    dsoup = bs4.BeautifulSoup(dpage.content)
+except:
+    lecturesPageUr= courseUrl+lecturesPage
+    dpage = rq.get(courseUrl)
+    dsoup = bs4.BeautifulSoup(dpage.content)
+    
 directory =dsoup.find("h1",class_="title").string
 print directory
 print("reading content ...")
